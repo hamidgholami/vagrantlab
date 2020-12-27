@@ -36,7 +36,8 @@ Vagrant.configure("2") do |config|
 #      config.proxy.no_proxy = "localhost,127.0.0.1"
 #      config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
       config.ssh.insert_key = false
-      config.vm.box = opts[:box]
+      #config.vm.box = opts[:box]
+      config.vm.box = "centos7-lab"
       config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
       config.vm.provider "libvirt" do |v|
@@ -44,6 +45,15 @@ Vagrant.configure("2") do |config|
         v.memory = opts[:ram]
         v.cpus = opts[:vcpu]
       end
+      
+      #Synced Directories
+      config.vm.synced_folder '.', '/vagrant', type: 'rsync', disabled: true
+      config.vm.synced_folder '/home/gholami/HAMID/w/vagrant/vagrant-ansible-lab/scripts', '/vagrant/provision/scripts', type: 'rsync'      
+      config.vm.synced_folder '/home/gholami/HAMID/w/vagrant/vagrant-ansible-lab/files', '/vagrant/provision/files', type: 'rsync'
+
+      #Privision
+      config.vm.provision 'shell', path: "/home/gholami/HAMID/w/vagrant/vagrant-ansible-lab/scripts/dotin.sh"
+
       config.vm.network :private_network, ip: opts[:ip],
                 :libvirt__forward_mode => "route",
                 :libvirt__dhcp_enabled => false
