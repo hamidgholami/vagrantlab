@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
   boxes = [
     {
       :name => "centos7lab1",
+      :box => "centos/7",
       :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
@@ -13,6 +14,7 @@ Vagrant.configure("2") do |config|
     },
     {
       :name => "centos7lab2",
+      :box => "centos/7",
       :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
@@ -20,12 +22,37 @@ Vagrant.configure("2") do |config|
     },
     {
       :name => "centos7lab3",
+      :box => "centos/7",
       :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.103"
+    },
+    {
+      :name => "debian10",
+      :box => "debian10_buster",
+      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/debian10_buster.box",
+      :ram => 1024,
+      :vcpu => 1,
+      :ip => "192.168.11.104"
+    },
+    {
+      :name => "focal-desktop",
+      :box => "focal-desktop",
+      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/ubuntu-20.04-desktop-amd64.box",
+      :ram => 1024,
+      :vcpu => 1,
+      :ip => "192.168.11.105"
+    },
+    {
+      :name => "ubuntu2004",
+      :box => "generic_ubuntu2004",
+      :box_url => "https://lanartifactory.dotin.ir/artifactory/vagrant/generic_ubuntu2004.box",
+      :ram => 1024,
+      :vcpu => 1,
+      :ip => "192.168.11.106"
     }
-  ]
+ ]
 
   # Provision each of the VMs.
   boxes.each do |opts|
@@ -36,8 +63,8 @@ Vagrant.configure("2") do |config|
 #      config.proxy.no_proxy = "localhost,127.0.0.1"
 #      config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
       config.ssh.insert_key = false
-      #config.vm.box = opts[:box]
-      config.vm.box = "centos/7"
+      config.vm.box = opts[:box]
+      #config.vm.box = "centos/7"
       config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
       config.vm.provider "libvirt" do |v|
