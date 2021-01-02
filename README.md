@@ -42,7 +42,9 @@ KVM acceleration can be used
 sudo apt install qemu libvirt-daemon-system \
 libvirt-clients libxslt1-dev libxml2-dev libvirt-dev \
 zlib1g-dev ruby-dev ruby-libvirt ebtables dnsmasq-base \
-qemu-kvm bridge-utils virtinst virt-manager libvirt-doc
+qemu-kvm bridge-utils virtinst virt-manager libvirt-doc \
+qemu-kvm virtinst virt-viewer virt-manager bridge-utils \
+cpu-checker virt-top imvirt
 ```
 - Start and enable libvirtd daemon service.
 
