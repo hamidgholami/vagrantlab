@@ -1,4 +1,4 @@
-## Vagrant Lab
+# Vagrant Lab
 This is a sample of Vagrantfile for prepare a suitable labratory with `vagrant` on `Ubuntu 20.04`.
 ***
 ## Vagrant boxes
@@ -10,9 +10,8 @@ These vagrant boxes are exist in this Vagrantfile.
 - Ubuntu 20.04 with desktop (GUI)
 
 ## Requierments
-***
 
-### Install KVM qemu libvirt
+#### Install KVM qemu libvirt
 
 [Official Ubuntu KVM installation](https://help.ubuntu.com/community/KVM/Installation)
 
@@ -56,7 +55,7 @@ sudo systemctl is-active libvirtd
 sudo usermod -aG libvirt $USER
 sudo usermod -aG kvm $USER
 ```
-### Install Vagrant
+#### Install Vagrant
 Download deb/rpm package from [vagrant official website](https://www.vagrantup.com/downloads).
 - Install vagrant package.
 
