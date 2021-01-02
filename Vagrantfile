@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
     {
       :name => "ubuntu2004",
       :box => "generic_ubuntu2004",
-      :box_url => "https://lanartifactory.dotin.ir/artifactory/vagrant/generic_ubuntu2004.box",
+      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/generic_ubuntu2004.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.106"
@@ -64,39 +64,36 @@ Vagrant.configure("2") do |config|
 #      config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
       config.ssh.insert_key = false
       config.vm.box = opts[:box]
-      #config.vm.box = "centos/7"
       config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
-      config.vm.provider "libvirt" do |v|
-#      config.vm.provider :virtualbox do |v|
+      config.vm.provider "libvirt" do |v| # or config.vm.provider :virtualbox do |v|
         v.memory = opts[:ram]
         v.cpus = opts[:vcpu]
       end
       
       #Synced Directories
       config.vm.synced_folder '.', '/vagrant', type: 'rsync', disabled: true
-      config.vm.synced_folder './scripts', '/vagrant/provision/scripts', type: 'rsync'      
+      config.vm.synced_folder '.', '/vagrant', disabled: true
+      config.vm.synced_folder './scripts', '/vagrant/provision/scripts', type: 'rsync'
       config.vm.synced_folder './files', '/vagrant/provision/files', type: 'rsync'
-
-      #Privision
-      config.vm.provision 'shell', path: "./scripts/dotin.sh"
-
+     
+      if opts[:box] == 'debian10_buster' # Debian 10 buster
+              config.nfs.functional = false
+              config.nfs.verify_installed = false
+              #config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
+      elsif opts[:box] == 'centos/7' # CentOS7
+              config.vm.provision 'shell', path: "./scripts/dotin-redhat.sh"
+      elsif opts[:box] == 'generic_ubuntu2004' # Ubuntu 20.04
+              config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
+      elsif opts[:box] == 'focal-desktop' # Ubuntu with desktop
+              config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
+      else
+              break
+      end
+      # Network
       config.vm.network :private_network, ip: opts[:ip],
                 :libvirt__forward_mode => "route",
                 :libvirt__dhcp_enabled => false
-#      config.vm.provision :file do |file|
-#         file.source     = './keys/vagrant'
-#         file.destination    = '/tmp/vagrant'
-#        end
-#      config.vm.provision :file do |file|
-#        file.source     = './inventory-test.yaml'
-#        file.destination    = '/home/vagrant/inventory-test.yaml'
-#       end
-#      config.vm.provision :shell, path: "bootstrap-node.sh"
-#      config.vm.provision :ansible do |ansible|
-#        ansible.verbose = "v"
-#        ansible.playbook = "playbook.yml"
-#      end
    end
   end
 end
