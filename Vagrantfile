@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
 #      config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
       config.ssh.insert_key = false
       config.vm.box = opts[:box]
-      config.vm.box_url = opts[:box_url]
+#      config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
       config.vm.provider "libvirt" do |v| # or config.vm.provider :virtualbox do |v|
         v.memory = opts[:ram]
