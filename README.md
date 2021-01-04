@@ -94,9 +94,8 @@ vagrant up <boxes defined name>
 ***
 **Author**: Hamid Gholami (hidgholami@gmail.com)
 
-[LinkedIn](https://www.linkedin.com/in/hamid-gholami)
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/hamid-gholami)
 &nbsp;
-[GitHub](https://github.com/hamidgholami)
+[![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/hamidgholami)
 &nbsp;
-[Twitter](https://www.twitter.com/045_hamid)
-
+[![Twitter](http://i.imgur.com/wWzX9uB.png) Twitter](https://www.twitter.com/045_hamid)

@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     {
       :name => "centos7lab1",
       :box => "centos/7",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.101"
@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
     {
       :name => "centos7lab2",
       :box => "centos/7",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.102"
@@ -23,31 +23,31 @@ Vagrant.configure("2") do |config|
     {
       :name => "centos7lab3",
       :box => "centos/7",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/centos7_libvirt.box",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.103"
     },
     {
       :name => "debian10",
-      :box => "debian10_buster",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/debian10_buster.box",
+      :box => "debian/buster64",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/debian10_buster.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.104"
     },
     {
       :name => "focal-desktop",
-      :box => "focal-desktop",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/ubuntu-20.04-desktop-amd64.box",
+      :box => "peru/ubuntu-20.04-desktop-amd64",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/ubuntu-20.04-desktop-amd64.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.105"
     },
     {
       :name => "ubuntu2004",
-      :box => "generic_ubuntu2004",
-      :box_url => "http://lanartifactory.dotin.ir/artifactory/vagrant/generic_ubuntu2004.box",
+      :box => "generic/ubuntu2004",
+      #:box_url => "http://mycompany.registry.com/artifactory/vagrant/generic_ubuntu2004.box",
       :ram => 1024,
       :vcpu => 1,
       :ip => "192.168.11.106"
@@ -77,16 +77,16 @@ Vagrant.configure("2") do |config|
       config.vm.synced_folder './scripts', '/vagrant/provision/scripts', type: 'rsync'
       config.vm.synced_folder './files', '/vagrant/provision/files', type: 'rsync'
      
-      if opts[:box] == 'debian10_buster' # Debian 10 buster
+      if opts[:box] == 'debian/buster64' # Debian 10 buster
               config.nfs.functional = false
               config.nfs.verify_installed = false
-              #config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
+              #config.vm.provision 'shell', path: "./scripts/debian.sh"
       elsif opts[:box] == 'centos/7' # CentOS7
-              config.vm.provision 'shell', path: "./scripts/dotin-redhat.sh"
-      elsif opts[:box] == 'generic_ubuntu2004' # Ubuntu 20.04
-              config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
-      elsif opts[:box] == 'focal-desktop' # Ubuntu with desktop
-              config.vm.provision 'shell', path: "./scripts/dotin-debian.sh"
+              config.vm.provision 'shell', path: "./scripts/redhat.sh"
+      elsif opts[:box] == 'generic/ubuntu2004' # Ubuntu 20.04
+              config.vm.provision 'shell', path: "./scripts/debian.sh"
+      elsif opts[:box] == 'peru/ubuntu-20.04-desktop-amd64' # Ubuntu with desktop
+              config.vm.provision 'shell', path: "./scripts/debian.sh"
       else
               break
       end
