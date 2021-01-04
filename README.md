@@ -1,5 +1,5 @@
 # Vagrant Lab
-This is a sample of Vagrantfile for prepare a suitable labratory with `vagrant` on `Ubuntu 20.04`.
+This is a sample of `Vagrantfile` for prepare a suitable laboratory with `vagrant` to make multiple machines on `Ubuntu 20.04`. 
 ***
 ## Vagrant boxes
 These vagrant boxes exist in this Vagrantfile.
