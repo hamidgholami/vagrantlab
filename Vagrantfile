@@ -67,6 +67,9 @@ Vagrant.configure("2") do |config|
 #      config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
       config.vm.provider "libvirt" do |v| # or config.vm.provider :virtualbox do |v|
+        v.storage :file, :size => '5G'
+        v.storage :file, :size => '5G'
+        v.storage :file, :size => '5G'
         v.memory = opts[:ram]
         v.cpus = opts[:vcpu]
       end
