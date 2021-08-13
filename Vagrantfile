@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.101"
+      :ip => "192.168.56.101"
     },
     {
       :name => "centos7lab2",
@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.102"
+      :ip => "192.168.56.102"
     },
     {
       :name => "centos7lab3",
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/centos7_libvirt.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.103"
+      :ip => "192.168.56.103"
     },
     {
       :name => "debian10",
@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/debian10_buster.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.104"
+      :ip => "192.168.56.104"
     },
     {
       :name => "focal-desktop",
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/ubuntu-20.04-desktop-amd64.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.105"
+      :ip => "192.168.56.105"
     },
     {
       :name => "ubuntu2004",
@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
       #:box_url => "http://mycompany.registry.com/artifactory/vagrant/generic_ubuntu2004.box",
       :ram => 1024,
       :vcpu => 1,
-      :ip => "192.168.11.106"
+      :ip => "192.168.56.106"
     }
  ]
 
@@ -66,10 +66,10 @@ Vagrant.configure("2") do |config|
       config.vm.box = opts[:box]
 #      config.vm.box_url = opts[:box_url]
       config.vm.hostname = opts[:name]
-      config.vm.provider "libvirt" do |v| # or config.vm.provider :virtualbox do |v|
-        v.storage :file, :size => '5G'
-        v.storage :file, :size => '5G'
-        v.storage :file, :size => '5G'
+      config.vm.provider "virtualbox" do |v| # or config.vm.provider :virtualbox do |v|
+        # v.storage :file, :size => '5G'
+        # v.storage :file, :size => '5G'
+        # v.storage :file, :size => '5G'
         v.memory = opts[:ram]
         v.cpus = opts[:vcpu]
       end
@@ -94,9 +94,9 @@ Vagrant.configure("2") do |config|
               break
       end
       # Network
-      config.vm.network :private_network, ip: opts[:ip],
-                :libvirt__forward_mode => "route",
-                :libvirt__dhcp_enabled => false
+      config.vm.network :private_network, ip: opts[:ip]
+                # :libvirt__forward_mode => "route",
+                # :libvirt__dhcp_enabled => false
    end
   end
 end
